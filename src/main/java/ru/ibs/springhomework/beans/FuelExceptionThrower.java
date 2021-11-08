@@ -11,11 +11,13 @@ public class FuelExceptionThrower {
     }
 
     @Around("callAtBusinessMethods")
-    public  Object fuelExceptionThrower(ProceedingJoinPoint pjp) throws Throwable {
+    public  String fuelExceptionThrower(ProceedingJoinPoint pjp) throws Throwable {
+
         try {
-            return pjp.proceed();
+            pjp.proceed();
         } catch (Exception e){
             return "error";
         }
+        return null;
     }
 }

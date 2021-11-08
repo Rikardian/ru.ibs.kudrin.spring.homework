@@ -21,7 +21,7 @@ public class FuelController {
     public String checkFuelType(@RequestParam(name = "name", required = false) String engineType, Model model){
         model.addAttribute("name", engineMap.get(engineType).powerUp());
 
-        return "view.engineType";
+        return "engineType";
     }
 
 
