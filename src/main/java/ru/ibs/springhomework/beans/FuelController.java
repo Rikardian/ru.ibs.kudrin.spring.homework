@@ -13,7 +13,7 @@ import java.util.Map;
 @Controller
 public class FuelController {
 
-    @Autowired
+    @Autowired(required = false)
     @Qualifier("engineMapInitializer")
     HashMap<String, Engine> engineMap;
 
