@@ -11,7 +11,7 @@ public class FuelExceptionThrower {
 
 
     @Around("callAtBusinessMethods")
-    public  String fuelExceptionThrower(ProceedingJoinPoint pjp, Object controller) throws Throwable {
+    public  String fuelExceptionThrower(ProceedingJoinPoint pjp) throws Throwable {
 
         try {
             pjp.proceed();
