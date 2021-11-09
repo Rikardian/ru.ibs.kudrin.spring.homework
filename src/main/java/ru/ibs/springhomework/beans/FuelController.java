@@ -24,7 +24,7 @@ public class FuelController {
 
     @GetMapping(value = "check")
     @FuelExceptionHandle
-    public String checkFuelType(@RequestParam(name = "name", required = false) String type, Model model){
+    public String checkFuelType(@RequestParam(name = "type", required = false) String type, Model model) throws Exception {
 
 
         if (DieselEngine.getType().equals(type)){
@@ -32,6 +32,9 @@ public class FuelController {
         }
         else if (PetrolEngine.getType().equals(type)){
             model.addAttribute("name", petrolEngine.powerUp());
+        }
+        else {
+            throw new Exception();
         }
 
 
