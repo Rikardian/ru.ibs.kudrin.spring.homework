@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -11,16 +12,28 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Controller
+@RequestMapping("/mvc/fuel")
 public class FuelController {
 
-    @Autowired(required = false)
-    @Qualifier("engineMapInitializer")
-    HashMap<String, Engine> engineMap;
 
+    @Autowired
+    DieselEngine dieselEngine;
+
+    @Autowired
+    PetrolEngine petrolEngine;
+
+    @GetMapping(value = "check")
     @FuelExceptionHandle
-    @RequestMapping("/mvc/fuel")
-    public String checkFuelType(@RequestParam(name = "name", required = false) String engineType, Model model){
-        model.addAttribute("name", engineMap.get(engineType).powerUp());
+    public String checkFuelType(@RequestParam(name = "name", required = false) String type, Model model){
+
+
+        if (DieselEngine.getType().equals(type)){
+            model.addAttribute("name", dieselEngine.powerUp());
+        }
+        else if (PetrolEngine.getType().equals(type)){
+            model.addAttribute("name", petrolEngine.powerUp());
+        }
+
 
         return "engineType";
     }
